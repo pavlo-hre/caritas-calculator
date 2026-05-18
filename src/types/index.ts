@@ -1,23 +1,20 @@
 
-export interface ServiceItem {
+export interface ServiceType {
   id: string;
   code: string;
   name: string;
   time: number;
   price: number;
   defaultQty: number;
-  subItems?: ServiceItem[];
+  subItems?: ServiceType[];
 }
 
 export interface Section {
   section: string;
-  items: ServiceItem[];
+  items: ServiceType[];
 }
 
-export interface SelectedService {
-  code: string;
-  name: string;
-  price: number;
+export interface SelectedService extends ServiceType{
   quantity: number;
   total: number;
 }

@@ -1,5 +1,5 @@
 import type { FC } from "react";
-import type { Section, SelectedService } from "../types";
+import type { Section, SelectedService, ServiceType } from '../types';
 import styles from "../styles/ServiceCalculator.module.css";
 import ServiceItem from "./ServiceItem";
 
@@ -10,10 +10,7 @@ interface ServiceSectionProps {
   onToggleExpand: (index: string) => void;
   selectedServices: Map<string, SelectedService>;
   onAddService: (
-    code: string,
-    name: string,
-    price: number,
-    defaultQty?: number,
+    serviceItem: ServiceType
   ) => void;
   onIncrementService: (code: string) => void;
   onDecrementService: (code: string) => void;

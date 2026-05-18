@@ -2,15 +2,41 @@
   min-height: 100vh;
   padding: 20px;
   text-align: left;
+  width: 100%;
+  max-width: 1126px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+@media (max-width: 1100px) {
+  .calculator-container {
+    max-width: 100vw;
+    padding: 10px;
+  }
+}
+
+@media (max-width: 600px) {
+  .calculator-container {
+    padding: 4px;
+    min-width: 0;
+    width: 100vw;
+  }
 }
 
 .calculator-content {
   max-width: 1400px;
   margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1fr;
+  display: flex;
+  flex-direction: column;
   gap: 20px;
   text-align: left;
+}
+
+@media (max-width: 600px) {
+  .calculator-content {
+    gap: 8px;
+    padding: 0;
+  }
 }
 
 /* Services List */
@@ -19,10 +45,8 @@
   flex-direction: column;
   gap: 12px;
   text-align: center;
-}
-
-.services-list h1 {
-  text-align: center !important;
+  margin-bottom: 40px;
+  padding-top: 40px;
 }
 
 .services-list h1 {
@@ -30,7 +54,11 @@
   color: #333;
   font-size: 28px;
   font-weight: 600;
-  text-align: left;
+  text-align: center !important;
+  @media screen and (max-width: 600px) {
+   line-height: 1.2;
+    font-size: 24px;
+  }
 }
 
 /* Sections */
@@ -88,6 +116,11 @@
 .service-item-container {
   display: flex;
   flex-direction: column;
+
+}
+
+.service-item-container-total {
+  border-bottom: 2px solid #979da6;
 }
 
 .service-item {
@@ -112,12 +145,19 @@
   background: #dcfce7;
   border-color: #86efac;
   box-shadow: 0 0 0 3px rgba(134, 239, 172, 0.1);
+  @media screen and (max-width: 600px) {
+
+  }
 }
 
 .item-controls {
   display: flex;
   align-items: center;
   gap: 4px;
+  @media screen and (max-width: 600px) {
+    justify-content: center;
+    flex-basis: 50%;
+  }
 }
 
 .service-details {
@@ -130,6 +170,10 @@
 .service-main {
   display: flex;
   align-items: flex-start;
+  @media screen and (max-width: 600px) {
+    flex-direction: row;
+    align-items: baseline;
+  }
 }
 
 .service-code {
@@ -140,6 +184,10 @@
   font-weight: 500;
   flex-shrink: 0;
   text-align: center;
+  @media screen and (max-width: 600px) {
+    min-width: auto;
+    transform: translateY(1px);
+  }
 }
 
 .service-name {
@@ -153,22 +201,18 @@
 
 .service-time {
   margin: 0;
-  font-size: 15px;
+  font-size: 17px;
   color: #4b5563;
   white-space: nowrap;
-  padding: 4px 8px;
-  background: #f3f4f6;
-  border-radius: 4px;
   font-weight: 500;
   text-align: center;
 }
 
 .service-price {
   font-weight: 600;
-  color: #1e40af;
-  min-width: 70px;
+  color: #1d1e1d;
   text-align: right;
-  font-size: 15px;
+  font-size: 17px;
 }
 
 .quantity-display {
@@ -208,11 +252,103 @@
   text-align: left;
 }
 
+.sub-service-item:hover {
+  background: #f3f4f6;
+}
+
+.sub-service-item.selected {
+  background: #dcfce7;
+  border-color: #86efac;
+}
+
+.sub-service-details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.sub-service-name {
+  margin: 0;
+  font-size: 15px;
+  color: #1f2937;
+  font-weight: 500;
+  text-align: left;
+}
+
+.sub-service-time {
+  margin: 0;
+  font-size: 15px;
+  color: #4b5563;
+  white-space: nowrap;
+  font-weight: 500;
+  text-align: center;
+}
+
+.sub-service-price {
+  font-weight: 600;
+  color: #1e40af;
+  margin: 0;
+  min-width: 60px;
+  text-align: right;
+  font-size: 15px;
+}
+
+.sub-service-controls {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.btn-small:hover, .btn-small:focus {
+  background: #bfdbfe;
+  border-color: #60a5fa;
+  transform: scale(1.05);
+}
+
+.btn-small:active {
+  transform: scale(0.95);
+}
+
+.btnSmall, .btn-primary, .btn-quantity {
+  width: 100%;
+  min-width: 44px;
+  min-height: 44px;
+  font-size: 18px;
+  padding: 8px 0;
+}
+
+.qty-small {
+  min-width: 28px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  color: #1e40af;
+  padding: 0 4px;
+}
+
+/* Parent Services */
+.parent-service {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 8px 0;
+}
+
+.parent-name {
+  padding: 8px 12px;
+  font-weight: 600;
+  color: #1f2937;
+  font-size: 18px;
+  background: #eff6ff;
+  border-left: 3px solid #3b82f6;
+  text-align: left;
+}
+
 .sub-items {
   display: flex;
   flex-direction: column;
   gap: 6px;
-  padding-left: 12px;
 }
 
 .sub-service-item {
@@ -294,6 +430,10 @@
   justify-content: center;
   font-family: inherit;
   padding-bottom: 2px;
+  @media screen and (max-width: 600px) {
+    max-width: 120px;
+    margin-left: auto;
+  }
 }
 
 .btn-small {
@@ -323,6 +463,17 @@
 
 .btn-small:active {
   transform: scale(0.95);
+}
+
+.btnSmall, .btn-primary, .btn-quantity {
+  @media screen and (max-width: 600px) {
+    width: 100%;
+    min-width: 44px;
+    min-height: 44px;
+    font-size: 18px;
+    padding: 8px 0;
+
+  }
 }
 
 .qty-small {
@@ -362,9 +513,6 @@
 }
 
 .selected-services-list {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
   max-height: 400px;
   overflow-y: auto;
   padding-bottom: 12px;
@@ -373,37 +521,33 @@
 }
 
 .selected-service-item {
-  display: grid;
-  grid-template-columns: 1fr auto auto;
-  gap: 8px;
-  padding: 12px;
-  background: #dcfce7;
-  border-radius: 6px;
-  border: 1px solid #86efac;
-  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #e5e7eb;
 }
 
 .service-info {
   display: flex;
-  flex-direction: column;
-  gap: 4px;
+  flex: 1;
+  justify-content: space-between;
+  gap: 10px;
   min-width: 0;
 }
 
 .service-info .service-name {
-  font-size: 14px;
+  font-size: 16px;
   color: #1f2937;
-  font-weight: 600;
+  font-weight: 400;
   white-space: normal;
   word-break: break-word;
   text-align: left;
 }
 
 .service-info .service-price {
-  font-size: 13px;
+  font-size: 15px;
   color: #1e40af;
   font-weight: 600;
   text-align: right;
+  flex-shrink: 0;
 }
 
 .quantity-controls {
@@ -412,23 +556,6 @@
   gap: 4px;
 }
 
-.btn-quantity {
-  width: 36px;
-  height: 36px;
-  padding: 0;
-  border: 2px solid #93c5fd;
-  background: #dbeafe;
-  color: #1e40af;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: 700;
-  font-size: 16px;
-  transition: all 0.2s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: inherit;
-}
 
 .btn-quantity:hover {
   background: #bfdbfe;
@@ -553,4 +680,116 @@
   width: 25px;
   flex-shrink: 0;
   height: 25px;
+  @media screen and (max-width: 600px) {
+  display: none;
+  }
+}
+
+.priceTime {
+  display: flex;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+  padding: 3px;
+  border-radius: 6px;
+  font-size: 17px;
+  @media screen and (max-width: 600px) {
+    flex-basis: 50%;
+    justify-content: flex-start;
+  }
+}
+
+
+.totalPriceText {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.totalByRow {
+  padding-left: 10px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.removeBtn {
+
+}
+
+.removeBtnWrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 130px;
+  @media screen and (max-width: 600px) {
+    position: absolute;
+    top: -42px;
+  }
+}
+
+@media (max-width: 600px) {
+  .service-item, .sub-service-item {
+    display: flex;
+    justify-content: space-between;
+    /*grid-template-columns: 1fr;*/
+    gap: 8px;
+    flex-wrap: wrap;
+    padding: 10px 4px;
+    font-size: 15px;
+  }
+  .service-details, .sub-service-details {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+    @media screen and (max-width: 600px) {
+        flex-basis: 100%;
+    }
+  }
+  .item-controls, .sub-service-controls {
+    gap: 2px;
+  }
+  .btnSmall, .btn-primary, .btn-quantity {
+    width: 100%;
+    min-width: 44px;
+    min-height: 44px;
+    font-size: 18px;
+    padding: 8px 0;
+  }
+  .service-main, .sub-service-details {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    @media screen and (max-width: 600px) {
+      flex-direction: row;
+    }
+  }
+  .service-code, .service-name, .service-time, .service-price,
+  .sub-service-name, .sub-service-time, .sub-service-price {
+    font-size: 15px;
+    text-align: left;
+  }
+  .section-header {
+    font-size: 17px;
+    padding: 10px 4px;
+  }
+  .section-content {
+    padding: 4px;
+  }
+  .parent-name {
+    font-size: 16px;
+    padding: 6px 4px;
+  }
+}
+
+.controlBox {
+  @media screen and (max-width: 600px) {
+    margin-left: auto;
+    position: relative;
+  }
+}
+
+.priceTimeTotal {
+  @media screen and (max-width: 600px) {
+    flex-basis: 100%;
+  }
 }

@@ -1,8 +1,9 @@
-import { useState, useCallback } from "react";
-import type { SelectedService } from "../types";
-import styles from "../styles/ServiceCalculator.module.css";
-import priceData from "../../price.json";
-import ServiceSection from "./ServiceSection";
+import { useState, useCallback } from 'react';
+import type { SelectedService, ServiceType, } from '../types';
+import styles from '../styles/ServiceCalculator.module.css';
+import priceData from '../../price.json';
+import ServiceSection from './ServiceSection';
+import ServiceItem from './ServiceItem.tsx';
 
 export default function ServiceCalculator() {
   const [selectedServices, setSelectedServices] = useState<
@@ -25,22 +26,20 @@ export default function ServiceCalculator() {
   }, []);
 
   const addService = useCallback(
-    (code: string, name: string, price: number, defaultQty?: number) => {
+    (serviceItem: ServiceType) => {
       setSelectedServices((prev) => {
         const newMap = new Map(prev);
-        if (newMap.has(code)) {
-          const service = newMap.get(code)!;
+        if (newMap.has(serviceItem.code)) {
+          const service = newMap.get(serviceItem.code)!;
           service.quantity += 1;
           service.total = service.quantity * service.price;
         } else {
-          const quantity = defaultQty && defaultQty !== 0 ? defaultQty : 1;
+          const quantity = serviceItem.defaultQty && serviceItem.defaultQty !== 0 ? serviceItem.defaultQty : 1;
 
-          newMap.set(code, {
-            code,
-            name,
-            price,
+          newMap.set(serviceItem.code, {
+            ...serviceItem,
             quantity,
-            total: quantity * price,
+            total: quantity * serviceItem.price,
           });
         }
         return newMap;
@@ -107,32 +106,11 @@ export default function ServiceCalculator() {
     (sum, service) => sum + service.total,
     0,
   );
-  const totalTime = Array.from(selectedServices.values()).reduce(
-    (sum, service) => {
-      const originalService = findOriginalService(service.code);
-      return sum + (originalService?.time || 0) * service.quantity;
-    },
-    0,
-  );
-
-  function findOriginalService(code: string) {
-    for (const section of priceData.services) {
-      for (const item of section.items) {
-        if (item.code === code) return item;
-        if (item.subItems) {
-          for (const subItem of item.subItems) {
-            if (subItem.code === code) return subItem;
-          }
-        }
-      }
-    }
-    return null;
-  }
 
   return (
-    <div className={styles["calculator-container"]}>
-      <div className={styles["calculator-content"]}>
-        <div className={styles["services-list"]}>
+    <div className={styles['calculator-container']}>
+      <div className={styles['calculator-content']}>
+        <div className={styles['services-list']}>
           <h1>Калькулятор цін на послуги центру догляду вдома на місяць</h1>
           {priceData.services.map((sectionData: any, index) => (
             <ServiceSection
@@ -150,76 +128,41 @@ export default function ServiceCalculator() {
           ))}
         </div>
 
-        <div className={styles["totals-section"]}>
-          <h2>Вибрані послуги</h2>
-          {selectedServices.size === 0 ? (
-            <p className={styles["no-services"]}>Немає вибраних послуг</p>
-          ) : (
+        {selectedServices.size !== 0 && (
+          <div className={styles['totals-section']}>
+            <h2>Вибрані послуги</h2>
             <>
-              <div className={styles["selected-services-list"]}>
+              <div className={styles['selected-services-list']}>
                 {Array.from(selectedServices.values()).map((service) => (
-                  <div
-                    key={service.code}
-                    className={styles["selected-service-item"]}
-                  >
-                    <div className={styles["service-info"]}>
-                      <p className={styles["service-name"]}>{service.name}</p>
-                      <p className={styles["service-price"]}>
-                        {service.price} грн
-                      </p>
-                    </div>
-                    <div className={styles["quantity-controls"]}>
-                      <button
-                        className={styles["btn-quantity"]}
-                        onClick={() => decrementService(service.code)}
-                        title="Зменшити на 1"
-                      >
-                        −
-                      </button>
-                      <span className={styles["quantity"]}>
-                        {service.quantity}
-                      </span>
-                      <button
-                        className={styles["btn-quantity"]}
-                        onClick={() => incrementService(service.code)}
-                        title="Збільшити на 1"
-                      >
-                        +
-                      </button>
-                    </div>
-                    <div className={styles["service-total"]}>
-                      <p>{service.total} грн</p>
-                      <button
-                        className={styles["btn-remove"]}
-                        onClick={() => removeService(service.code)}
-                        title="Видалити"
-                      >
-                        ✕
-                      </button>
-                    </div>
-                  </div>
+                  <ServiceItem
+                    key={`${service.code}`}
+                    item={service}
+                    itemCode={service.code}
+                    selectedServices={selectedServices}
+                    onAddService={() => {
+                    }}
+                    onIncrementService={incrementService}
+                    onDecrementService={decrementService}
+                    onRemoveService={removeService}
+                    totalMode={true}
+                  />
                 ))}
               </div>
 
-              <div className={styles["totals"]}>
-                <div className={styles["total-row"]}>
-                  <span>Загальний час:</span>
-                  <span className={styles["total-value"]}>{totalTime} хв</span>
-                </div>
+              <div className={styles['totals']}>
                 <div
-                  className={`${styles["total-row"]} ${styles["total-price-row"]}`}
+                  className={`${styles['total-row']} ${styles['total-price-row']}`}
                 >
-                  <span>Загальна вартість:</span>
+                  <span className={styles.totalPriceText}>Загальна вартість:</span>
                   <span
-                    className={`${styles["total-value"]} ${styles["total-price"]}`}
+                    className={`${styles['total-value']} ${styles['total-price']}`}
                   >
                     {totalPrice} грн
                   </span>
                 </div>
               </div>
             </>
-          )}
-        </div>
+          </div>)}
       </div>
     </div>
   );
