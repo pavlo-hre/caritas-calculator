@@ -165,7 +165,7 @@ export default function ServiceCalculator() {
 
       const thead = document.createElement('thead');
       const headRow = document.createElement('tr');
-      const headers = ['Код', 'Назва', 'К-ть', 'Ціна', 'Разом'];
+      const headers = ['Код', 'Назва', 'К-сть', 'Ціна (грн)', 'Разом (грн)'];
       const headerAlign = ['left', 'left', 'right', 'right', 'right'];
       headers.forEach((text, i) => {
         const th = document.createElement('th');
@@ -286,12 +286,12 @@ export default function ServiceCalculator() {
           s.code,
           s.name,
           ` ${s.quantity}`,
-          `${s.price} грн`,
-          `${s.total} грн`,
+          `${s.price}`,
+          `${s.total}`,
         ]);
 
         (doc as any).autoTable({
-          head: [['Код', 'Назва', 'К-ть', 'Ціна', 'Разом']],
+          head: [['Код', 'Назва', 'К-сть', 'Ціна (грн)', 'Разом (грн)']],
           body: rows,
           startY: 20,
           styles: { fontSize: Math.max(8, tableFont) },

@@ -13,14 +13,14 @@
               "name": "- магазин",
               "time": 30,
               "price": 200,
-              "defaultQty":  4
+              "defaultQty":  6
             },
             {
               "code": "1.1.2",
               "name": "- аптека",
               "time": 30,
               "price": 200,
-              "defaultQty": 0
+              "defaultQty": 2
             },
             {
               "code": "1.1.3",
@@ -67,7 +67,7 @@
           "name": "Приготування їжі",
           "time": 60,
           "price": 370,
-          "defaultQty": 0
+          "defaultQty": 8
         },
         {
           "id": "04",
@@ -94,7 +94,7 @@
               "name": "- вологе",
               "time": 42,
               "price": 340,
-              "defaultQty": 0
+              "defaultQty": 4
             },
             {
               "code": "1.5.3",
@@ -163,7 +163,7 @@
           "name": "Оплата комунальних платежів (звірення платежів)",
           "time": 45,
           "price": 275,
-          "defaultQty": 0
+          "defaultQty": 1
         }
       ]
     },
@@ -200,7 +200,7 @@
           "name": "Зміна постільної білизни; допомога при зміні постільної білизни",
           "time": 20,
           "price": 140,
-          "defaultQty": 0
+          "defaultQty": 4
         },
         {
           "id": "13",
@@ -304,7 +304,7 @@
           "name": "Допомога у догляді за особистими речами, зовнішнім виглядом (окрім прання)",
           "time": 30,
           "price": 180,
-          "defaultQty": 0
+          "defaultQty": 2
         },
         {
           "id": "26",

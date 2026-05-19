@@ -7,9 +7,9 @@ export default function Header() {
   return (
     <header className={styles.header}>
       <div className={styles.headerBox}>
-        <img src={logo} alt="Caritas Zaporizhzhia"/>
+        <a href="https://zp.caritas.ua/"> <img src={logo} alt="Caritas Zaporizhzhia"/></a>
         <div className={styles.contactInfo}>
-          <div>
+        <div>
             <LocationIcon/>
             <a href="https://share.google/sdcwVY7s8megnt6ED" target="_blank">Запоріжжя, вул. Семафорна, 8</a>
           </div>
