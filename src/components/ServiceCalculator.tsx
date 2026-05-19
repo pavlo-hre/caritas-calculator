@@ -157,6 +157,14 @@ export default function ServiceCalculator() {
       heading.style.margin = `0 0 ${Math.round(padPx * 1.5)}px 0`;
       container.appendChild(heading);
 
+      // Add phone line to header
+      const phoneLine = document.createElement('div');
+      phoneLine.innerText = 'Телефон для довідок +38 067 801 88 96';
+      phoneLine.style.fontSize = `${Math.max(12, Math.round(tablePx * 0.95))}px`;
+      phoneLine.style.color = '#333';
+      phoneLine.style.marginBottom = `${Math.round(padPx * 1.2)}px`;
+      container.appendChild(phoneLine);
+
       // table
       const table = document.createElement('table');
       table.style.width = '100%';
@@ -281,6 +289,7 @@ export default function ServiceCalculator() {
 
         doc.setFontSize(titleSize);
         doc.text('Послуги центру догляду вдома Карітас Запоріжжя на місяць', 14, 14);
+        doc.text('Телефон для довідок +38 067 801 88 96', 14, 28);
 
         const rows = Array.from(selectedServices.values()).map((s) => [
           s.code,
