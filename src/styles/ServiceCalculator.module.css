@@ -793,3 +793,17 @@
     flex-basis: 100%;
   }
 }
+
+.exportBtn {
+  width: 220px;
+  margin: 40px auto;
+  gap: 10px;
+  background-color: #277bf9;
+  color: #ffffff;
+  @media screen and (max-width: 600px) {
+    max-width: 240px;
+  }
+     & svg {
+       flex-shrink: 0;
+     }
+}
