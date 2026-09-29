@@ -1,5 +1,6 @@
 import { useState, useCallback } from 'react';
 import type { SelectedService, ServiceType, } from '../types';
+import '../styles/theme.css';
 import styles from '../styles/ServiceCalculator.module.css';
 import priceData from '../../price.json';
 import ServiceSection from './ServiceSection';
@@ -325,12 +326,12 @@ export default function ServiceCalculator() {
   };
 
   return (
-    <div className={styles['calculator-container']}>
+    <div className={clsx('cz-calc', styles['calculator-container'])}>
       <div className={styles['calculator-content']}>
         <div className={styles['services-list']}>
-          <header>
+          <div>
             <h1>Калькулятор цін на послуги центру догляду вдома на місяць</h1>
-          </header>
+          </div>
           {priceData.services.map((sectionData: any, index) => (
             <ServiceSection
               key={index}

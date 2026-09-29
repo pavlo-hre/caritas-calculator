@@ -9,11 +9,10 @@
   • font-size is set on leaves, not on containers whose children also set it (em would compound);
   • nothing here reacts to [data-a11y-fs] by changing font-size (that would scale twice) —
     only layout switches to a wrapping one when enlarged text is on.
-  Base size comes from the page (index.css :root in the standalone build).
+  Base size comes from the page (index.css :root in the standalone build, the WP theme when embedded).
 */
 
 .calculator-container {
-  min-height: 100vh;
   padding: 20px;
   text-align: left;
   width: 100%;
@@ -476,7 +475,8 @@
   box-shadow: var(--cz-shadow-lg);
   height: fit-content;
   position: sticky;
-  top: 20px;
+  /* Set --cz-sticky-top on the page when the WP theme has a sticky header */
+  top: var(--cz-sticky-top, 20px);
 }
 
 .totals-section h2 {

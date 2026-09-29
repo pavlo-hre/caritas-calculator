@@ -6,6 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
+    "build:wp": "tsc -b && vite build --config vite.wp.config.ts",
+    "package:wp": "npm run build:wp && rm -f caritas-calculator.zip && cd wp-plugin && zip -rq ../caritas-calculator.zip caritas-calculator -x '*.DS_Store'",
     "lint": "eslint .",
     "preview": "vite preview"
   },

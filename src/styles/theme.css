@@ -1,0 +1,52 @@
+/*
+  Palette and base element styles, shared by the standalone page and the WordPress embed.
+  Everything is scoped to .cz-calc (the calculator root) so nothing leaks into the WP theme.
+  No font-size here: the base size comes from the page (see ServiceCalculator.module.css).
+*/
+
+.cz-calc {
+  /* Caritas Zaporizhzhia palette (zp-caritas-demo.pp.ua) */
+  --cz-ink: #1a202c;
+  --cz-body: #2d3748;
+  --cz-muted: #4a5568;
+  --cz-subtle: #718096;
+  --cz-blue: #0057a8;
+  --cz-blue2: #0083ca;
+  --cz-yellow: #fcc91a;
+  --cz-yellow-h: #ffd84d;
+  --cz-yellow-soft: #fff4c7;
+  --cz-line: #dfeffa;
+  --cz-line-strong: #b8daf2;
+  --cz-tint: #f2fbfe;
+  --cz-icon: #eaf5fc;
+  --cz-icon-line: #d3e8f7;
+  --cz-shadow: 0 1px 2px rgba(26, 32, 44, 0.04), 0 18px 40px -28px rgba(0, 87, 168, 0.35);
+  --cz-shadow-lg: 0 1px 2px rgba(26, 32, 44, 0.04), 0 24px 60px -40px rgba(0, 87, 168, 0.35);
+  --cz-font: "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;
+
+  font-family: var(--cz-font);
+  line-height: 1.6;
+  color: var(--cz-body);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* No grey flash on tap: clickable cards would otherwise highlight as a whole */
+  -webkit-tap-highlight-color: transparent;
+}
+
+.cz-calc p {
+  margin: 0;
+}
+
+/* Buttons don't inherit font-size by default; they must, so enlarged text reaches them */
+.cz-calc button {
+  font-family: inherit;
+  font-size: inherit;
+  touch-action: manipulation;
+}
+
+.cz-calc :focus-visible {
+  outline: 3px solid var(--cz-blue2);
+  outline-offset: 3px;
+}
