@@ -24,33 +24,14 @@
 
 @media (max-width: 1100px) {
   .calculator-container {
-    max-width: 100vw;
     padding: 16px;
   }
 }
 
-@media (max-width: 600px) {
-  .calculator-container {
-    padding: 12px;
-    min-width: 0;
-    width: 100vw;
-  }
-}
-
 .calculator-content {
-  max-width: 1400px;
-  margin: 0 auto;
   display: flex;
   flex-direction: column;
   gap: 24px;
-  text-align: left;
-}
-
-@media (max-width: 600px) {
-  .calculator-content {
-    gap: 12px;
-    padding: 0;
-  }
 }
 
 /* Long Ukrainian words wrap instead of overflowing (lang="uk" enables hyphenation) */
@@ -68,7 +49,6 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
-  text-align: center;
   margin-bottom: 24px;
   padding-top: clamp(32px, 20px + 2.4vw, 52px);
 }
@@ -150,6 +130,7 @@
   margin: 0;
   font-size: 1em;
   line-height: inherit;
+  text-wrap: balance;
 }
 
 .section-title-text {
@@ -158,7 +139,6 @@
   font-weight: 800;
   line-height: 1.25;
   letter-spacing: -0.01em;
-  text-align: left;
   color: var(--cz-ink);
 }
 
@@ -288,10 +268,6 @@
   display: flex;
   align-items: center;
   gap: 6px;
-  @media screen and (max-width: 600px) {
-    justify-content: center;
-    flex-basis: 50%;
-  }
 }
 
 .service-details {
@@ -307,10 +283,6 @@
   align-items: flex-start;
   gap: 4px;
   min-width: 0;
-  @media screen and (max-width: 600px) {
-    flex-direction: row;
-    align-items: baseline;
-  }
 }
 
 .service-code {
@@ -323,10 +295,6 @@
   flex-shrink: 0;
   text-align: center;
   font-variant-numeric: tabular-nums;
-  @media screen and (max-width: 600px) {
-    min-width: auto;
-    transform: translateY(1px);
-  }
 }
 
 .service-name {
@@ -336,7 +304,6 @@
   color: var(--cz-ink);
   font-weight: 500;
   line-height: 1.45;
-  text-align: left;
 }
 
 .service-time {
@@ -354,6 +321,11 @@
   white-space: nowrap;
   font-weight: 600;
   text-align: center;
+}
+
+.service-item.selected .service-time {
+  background: #fff;
+  box-shadow: inset 0 0 0 1px var(--cz-icon-line);
 }
 
 /* Clock icon — same glyph as the site's contacts page */
@@ -395,7 +367,6 @@
   line-height: 1.4;
   background: var(--cz-tint);
   border-radius: 12px;
-  text-align: left;
 }
 
 .parent-name::before {
@@ -496,15 +467,6 @@
   font-variant-numeric: tabular-nums;
 }
 
-@media screen and (max-width: 600px) {
-  .btn-primary {
-    min-width: 7em;
-    margin-left: auto;
-    font-size: 1em;
-    padding: 0.45em 1em;
-  }
-}
-
 /* Totals Section */
 .totals-section {
   background: #fff;
@@ -522,8 +484,9 @@
   font-size: clamp(1.2em, 1.1em + 0.4vw, 1.45em);
   color: var(--cz-ink);
   font-weight: 800;
+  line-height: 1.25;
   letter-spacing: -0.01em;
-  text-align: left;
+  text-wrap: balance;
 }
 
 .totals-section h2::after {
@@ -563,7 +526,6 @@
   font-size: 0.88em;
   color: var(--cz-ink);
   font-weight: 500;
-  text-align: left;
 }
 
 .total-row .total-value {
@@ -583,7 +545,6 @@
   font-size: clamp(1.33em, 1.25em + 0.4vw, 1.6em);
   font-weight: 800;
   color: #fff;
-  text-align: right;
   white-space: nowrap;
 }
 
@@ -613,9 +574,6 @@
   flex-shrink: 0;
   height: 1.4em;
   margin-right: 0.35em;
-  @media screen and (max-width: 600px) {
-    display: none;
-  }
 }
 
 .iconWrap > button {
@@ -648,17 +606,6 @@
   justify-content: flex-end;
   gap: 6px 10px;
   margin: 0;
-  @media screen and (max-width: 600px) {
-    flex: 1 1 auto;
-    min-width: 0;
-    justify-content: flex-start;
-    gap: 6px 8px;
-  }
-}
-
-.service-item.selected .service-time {
-  background: #fff;
-  box-shadow: inset 0 0 0 1px var(--cz-icon-line);
 }
 
 .totalPriceText {
@@ -715,48 +662,15 @@
   justify-content: flex-end;
   gap: 10px;
   min-width: 7.6em;
-  /* On phones the row total + remove sit on the price line above the +/− controls */
-  @media screen and (max-width: 600px) {
-    position: absolute;
-    right: 0;
-    bottom: calc(100% + 8px);
-    min-width: 0;
-    min-height: 2.35em;
-  }
 }
 
+/* Phones */
 @media (max-width: 600px) {
-  .service-item {
-    display: flex;
-    justify-content: space-between;
-    gap: 8px;
-    flex-wrap: wrap;
+  .calculator-container {
     padding: 12px;
   }
-  .service-details {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 6px;
-    flex-basis: 100%;
-  }
-  .item-controls {
-    gap: 4px;
-  }
-  .service-main {
-    flex-direction: row;
-    align-items: flex-start;
-    gap: 6px;
-  }
-  .service-code, .service-name {
-    font-size: 0.88em;
-    text-align: left;
-  }
-  .service-price {
-    font-size: 0.94em;
-    text-align: left;
-  }
-  .service-time {
-    font-size: 0.76em;
+  .calculator-content {
+    gap: 12px;
   }
   .section {
     border-radius: 20px;
@@ -773,6 +687,74 @@
   }
   .parent-name {
     font-size: 0.94em;
+  }
+  .service-item {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    flex-wrap: wrap;
+    padding: 12px;
+  }
+  .service-details {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+    flex-basis: 100%;
+  }
+  .service-main {
+    gap: 6px;
+  }
+  .iconWrap {
+    display: none;
+  }
+  .service-code {
+    min-width: auto;
+    font-size: 0.88em;
+    text-align: left;
+    transform: translateY(1px);
+  }
+  .service-name {
+    font-size: 0.88em;
+  }
+  .service-price {
+    font-size: 0.94em;
+    text-align: left;
+  }
+  .service-time {
+    font-size: 0.76em;
+  }
+  .priceTime {
+    flex: 1 1 auto;
+    min-width: 0;
+    justify-content: flex-start;
+    gap: 6px 8px;
+  }
+  .priceTimeTotal {
+    flex-basis: 100%;
+  }
+  .controlBox {
+    margin-left: auto;
+    position: relative;
+  }
+  .item-controls {
+    justify-content: center;
+    flex-basis: 50%;
+    gap: 4px;
+  }
+  /* The row total + remove sit on the price line above the +/− controls */
+  .removeBtnWrap {
+    position: absolute;
+    right: 0;
+    bottom: calc(100% + 8px);
+    min-width: 0;
+    min-height: 2.35em;
+  }
+  /* "Додати" in a service row; the export button keeps its own sizing */
+  .service-item .btn-primary {
+    min-width: 7em;
+    margin-left: auto;
+    font-size: 1em;
+    padding: 0.45em 1em;
   }
 }
 
@@ -798,19 +780,6 @@
   margin-left: auto;
 }
 
-.controlBox {
-  @media screen and (max-width: 600px) {
-    margin-left: auto;
-    position: relative;
-  }
-}
-
-.priceTimeTotal {
-  @media screen and (max-width: 600px) {
-    flex-basis: 100%;
-  }
-}
-
 .exportBtn {
   width: auto;
   max-width: 100%;
@@ -818,26 +787,13 @@
   margin: 32px auto 0;
   padding: 0.8em 1.75em;
   gap: 0.6em;
-  border-color: var(--cz-yellow);
-  background-color: var(--cz-yellow);
-  color: var(--cz-ink);
   font-size: 1em;
   box-shadow: 0 14px 28px -14px rgba(196, 150, 0, 0.85);
-  @media screen and (max-width: 600px) {
-    margin-left: auto;
-  }
-  & svg {
-    flex-shrink: 0;
-    width: 1.65em;
-    height: 1.65em;
-    margin-left: -0.45em;
-  }
 }
 
-@media (hover: hover) {
-  .exportBtn:hover {
-    background-color: var(--cz-yellow-h);
-    border-color: var(--cz-yellow-h);
-    color: var(--cz-ink);
-  }
+.exportBtn svg {
+  flex-shrink: 0;
+  width: 1.65em;
+  height: 1.65em;
+  margin-left: -0.45em;
 }

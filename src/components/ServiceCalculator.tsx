@@ -31,10 +31,14 @@ export default function ServiceCalculator() {
     (serviceItem: ServiceType) => {
       setSelectedServices((prev) => {
         const newMap = new Map(prev);
-        if (newMap.has(serviceItem.code)) {
-          const service = newMap.get(serviceItem.code)!;
-          service.quantity += 1;
-          service.total = service.quantity * service.price;
+        const service = newMap.get(serviceItem.code);
+        if (service) {
+          const quantity = service.quantity + 1;
+          newMap.set(serviceItem.code, {
+            ...service,
+            quantity,
+            total: quantity * service.price,
+          });
         } else {
           const quantity = serviceItem.defaultQty && serviceItem.defaultQty !== 0 ? serviceItem.defaultQty : 1;
 
@@ -369,9 +373,7 @@ export default function ServiceCalculator() {
                 aria-live="polite"
               >
                 <span className={styles.totalPriceText}>Загальна вартість:</span>
-                <strong
-                  className={`${styles['total-value']} ${styles['total-price']}`}
-                >
+                <strong className={styles['total-value']}>
                   <data value={totalPrice}>{totalPrice}</data> грн
                 </strong>
               </p>
