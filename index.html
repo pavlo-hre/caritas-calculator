@@ -1,15 +1,52 @@
 <!doctype html>
-<html lang="en">
+<html lang="uk">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Калькулятор цін на послуги центру догляду вдома Caritas Zaporizhzhia </title>
+    <title>Калькулятор вартості догляду вдома на місяць — Карітас Запоріжжя</title>
+    <meta
+      name="description"
+      content="Розрахуйте місячну вартість послуг центру догляду вдома Карітас Запоріжжя: оберіть потрібні послуги, кількість і отримайте підсумок та PDF-кошторис. Телефон для довідок +38 067 801 88 96."
+    />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#0057a8" />
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="uk_UA" />
+    <meta property="og:site_name" content="Карітас Запоріжжя" />
+    <meta property="og:title" content="Калькулятор вартості догляду вдома на місяць — Карітас Запоріжжя" />
+    <meta
+      property="og:description"
+      content="Оберіть послуги догляду вдома й дізнайтеся місячну вартість. Підсумок можна завантажити у PDF."
+    />
+    <meta name="twitter:card" content="summary" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Калькулятор вартості догляду вдома",
+        "description": "Розрахунок місячної вартості послуг центру догляду вдома Карітас Запоріжжя.",
+        "inLanguage": "uk",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Any",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "UAH" },
+        "provider": {
+          "@type": "Organization",
+          "name": "Карітас Запоріжжя",
+          "url": "https://www.zp-caritas-demo.pp.ua/",
+          "telephone": "+380678018896",
+          "address": { "@type": "PostalAddress", "addressLocality": "Запоріжжя", "addressCountry": "UA" }
+        }
+      }
+    </script>
   </head>
   <body>
+    <noscript>
+      Для роботи калькулятора потрібно увімкнути JavaScript. Телефон для довідок: +38 067 801 88 96.
+    </noscript>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

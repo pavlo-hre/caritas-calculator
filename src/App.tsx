@@ -3,9 +3,9 @@ import ServiceCalculator from "./components/ServiceCalculator";
 
 function App() {
   return (
-    <div className={styles.appWrapper}>
+    <main className={styles.appWrapper}>
       <ServiceCalculator />
-    </div>
+    </main>
   );
 }
 

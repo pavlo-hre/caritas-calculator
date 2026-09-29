@@ -28,34 +28,40 @@ const ServiceSection: FC<ServiceSectionProps> = ({
   onDecrementService,
   onRemoveService,
 }) => {
-  return (
-    <div className={styles["section"]}>
-      <button
-        className={styles["section-header"]}
-        onClick={() => onToggleExpand(sectionIndex)}
-        aria-expanded={isExpanded}
-      >
-        <h2>{section.section}</h2>
-        <span className={styles["expand-icon"]}>{isExpanded ? "▼" : "▶"}</span>
-      </button>
+  const headingId = `section-heading-${sectionIndex}`;
+  const contentId = `section-content-${sectionIndex}`;
 
-      {isExpanded && (
-        <div className={styles["section-content"]}>
-          {section.items.map((item, itemIndex) => (
-            <ServiceItem
-              key={`${sectionIndex}-${itemIndex}`}
-              item={item}
-              itemCode={item.code}
-              selectedServices={selectedServices}
-              onAddService={onAddService}
-              onIncrementService={onIncrementService}
-              onDecrementService={onDecrementService}
-              onRemoveService={onRemoveService}
-            />
-          ))}
-        </div>
-      )}
-    </div>
+  return (
+    <section className={styles["section"]} aria-labelledby={headingId}>
+      <h2 className={styles["section-title"]}>
+        <button
+          type="button"
+          id={headingId}
+          className={styles["section-header"]}
+          onClick={() => onToggleExpand(sectionIndex)}
+          aria-expanded={isExpanded}
+          aria-controls={contentId}
+        >
+          <span className={styles["section-title-text"]}>{section.section}</span>
+          <span className={styles["expand-icon"]} aria-hidden="true">{isExpanded ? "▼" : "▶"}</span>
+        </button>
+      </h2>
+
+      <ul id={contentId} className={styles["section-content"]} hidden={!isExpanded}>
+        {section.items.map((item, itemIndex) => (
+          <ServiceItem
+            key={`${sectionIndex}-${itemIndex}`}
+            item={item}
+            itemCode={item.code}
+            selectedServices={selectedServices}
+            onAddService={onAddService}
+            onIncrementService={onIncrementService}
+            onDecrementService={onDecrementService}
+            onRemoveService={onRemoveService}
+          />
+        ))}
+      </ul>
+    </section>
   );
 };
 

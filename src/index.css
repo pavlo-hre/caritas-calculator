@@ -1,6 +1,25 @@
 :root {
-  font: 20px/120% Ubuntu, sans-serif;
-  letter-spacing: 0.18px;
+  /* Caritas Zaporizhzhia palette (zp-caritas-demo.pp.ua) */
+  --cz-ink: #1a202c;
+  --cz-body: #2d3748;
+  --cz-muted: #4a5568;
+  --cz-subtle: #718096;
+  --cz-blue: #0057a8;
+  --cz-blue2: #0083ca;
+  --cz-yellow: #fcc91a;
+  --cz-yellow-h: #ffd84d;
+  --cz-yellow-soft: #fff4c7;
+  --cz-line: #dfeffa;
+  --cz-line-strong: #b8daf2;
+  --cz-tint: #f2fbfe;
+  --cz-icon: #eaf5fc;
+  --cz-icon-line: #d3e8f7;
+  --cz-shadow: 0 1px 2px rgba(26, 32, 44, 0.04), 0 18px 40px -28px rgba(0, 87, 168, 0.35);
+  --cz-shadow-lg: 0 1px 2px rgba(26, 32, 44, 0.04), 0 24px 60px -40px rgba(0, 87, 168, 0.35);
+  --cz-font: "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;
+
+  font: 17px/1.6 var(--cz-font);
+  color: var(--cz-body);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -25,32 +44,48 @@
 
 body {
   margin: 0;
+  background: var(--cz-tint);
+  /* No grey flash on tap: clickable cards would otherwise highlight as a whole */
+  -webkit-tap-highlight-color: transparent;
+}
+
+button {
+  touch-action: manipulation;
 }
 
 h1,
 h2 {
-  font-weight: 500;
+  font-weight: 800;
+  color: var(--cz-ink);
+  text-wrap: balance;
 }
 
 h1 {
-  font-size: 56px;
-  letter-spacing: -1.68px;
+  font-size: clamp(1.6em, 1.3em + 1.4vw, 2.4em);
+  line-height: 1.18;
+  letter-spacing: -0.015em;
   margin: 32px 0;
   @media (max-width: 1024px) {
-    font-size: 36px;
     margin: 20px 0;
   }
 }
 h2 {
-  font-size: 24px;
-  line-height: 118%;
-  letter-spacing: -0.24px;
+  font-size: clamp(1.2em, 1.1em + 0.4vw, 1.45em);
+  line-height: 1.25;
+  letter-spacing: -0.01em;
   margin: 0 0 8px;
-  @media (max-width: 1024px) {
-    font-size: 20px;
-  }
 }
 p {
   margin: 0;
 }
 
+/* Buttons don't inherit font-size by default; they must, so enlarged text reaches them */
+button {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+:focus-visible {
+  outline: 3px solid var(--cz-blue2);
+  outline-offset: 3px;
+}

@@ -2,6 +2,8 @@ import type { FC } from 'react';
 import type { SelectedService, ServiceType } from '../types';
 import styles from '../styles/ServiceCalculator.module.css';
 import CheckIcon from './icons/CheckIcon.tsx';
+import { ClockIcon } from './icons/ClockIcon.tsx';
+import { CloseIcon } from './icons/CloseIcon.tsx';
 import clsx from 'clsx';
 
 interface ServiceItemProps {
@@ -54,14 +56,17 @@ const ServiceItem: FC<ServiceItemProps> = ({
     onAddService(item);
   }
 
+  const hasSubItems = item.subItems && item.subItems.length > 0;
+  const groupHeadingId = `service-group-${item.code}`;
+
   return (
-    <div className={clsx(styles['service-item-container'], totalMode && styles['service-item-container-total'])}>
-      {item.subItems && item.subItems.length > 0 ? (
+    <li className={clsx(styles['service-item-container'], totalMode && styles['service-item-container-total'])}>
+      {hasSubItems ? (
         // Parent item with sub-items
         <div className={styles['parent-service']}>
-          <div className={styles['parent-name']}>{item.code} {item.name}</div>
-          <div className={styles['sub-items']}>
-            {item.subItems.map((subItem: ServiceType) => (
+          <h3 id={groupHeadingId} className={styles['parent-name']}>{item.code} {item.name}</h3>
+          <ul className={styles['sub-items']} aria-labelledby={groupHeadingId}>
+            {item.subItems!.map((subItem: ServiceType) => (
               <ServiceItem
                 key={subItem.code}
                 item={subItem}
@@ -73,66 +78,80 @@ const ServiceItem: FC<ServiceItemProps> = ({
                 onAddService={onAddService}
               />
             ))}
-          </div>
+          </ul>
         </div>
       ) : (
         // Single service item
-        <div
+        <article
           onClick={handleAdd}
           className={`${styles['service-item']} ${isSelected && !totalMode ? styles['selected'] : ''}`}
+          aria-label={`${item.code} ${item.name}`}
         >
           <div className={styles['service-details']}>
             <div className={styles['service-main']}>
               {totalMode ? null : <div className={styles.iconWrap}>
-                {isSelected ? <div onClick={handleRemove}>
-                  <CheckIcon/>
-                </div> : <div style={{width: 21}}/>}
+                {isSelected ? (
+                  <button type="button" onClick={handleRemove} aria-label={`Прибрати: ${item.name}`} title="Прибрати">
+                    <CheckIcon/>
+                  </button>
+                ) : <div style={{width: 21}} aria-hidden="true"/>}
               </div>}
               <p className={styles['service-code']}>{item.code}</p>
               <p className={styles['service-name']}>{item.name}</p>
             </div>
           </div>
 
-          <div className={clsx(styles.priceTime, totalMode && styles.priceTimeTotal)}>
-            <p className={styles['service-price']}>{item.price} грн / </p>
-            <p className={styles['service-time']}>&nbsp;{item.time} хв 🕒 </p>
-          </div>
+          <p className={clsx(styles.priceTime, totalMode && styles.priceTimeTotal)}>
+            <span className={styles['service-price']}>
+              <data value={item.price}>{item.price}</data> грн<span aria-hidden="true"> / </span>
+            </span>
+            <span className={styles['service-time']}>
+              <ClockIcon />
+              <time dateTime={`PT${item.time}M`}>{item.time} хв</time>
+            </span>
+          </p>
 
           {isSelected && selectedService ? (
             <div className={styles.controlBox}>
-              <div className={styles['item-controls']} role="controls">
+              <div className={styles['item-controls']} role="group" aria-label={`Кількість: ${item.name}`}>
                 <button
+                  type="button"
                   className={styles['btn-small']}
                   onClick={selectedService.quantity === 1 ? handleRemove : handleDecrement}
                   title="Зменшити"
+                  aria-label="Зменшити кількість"
                 >
-                  -
+                  <span aria-hidden="true">−</span>
                 </button>
-                <span className={styles['qty-small']}>
-                {selectedService.quantity}
-              </span>
+                <output className={styles['qty-small']} aria-live="polite">
+                  {selectedService.quantity}
+                </output>
                 <button
+                  type="button"
                   className={styles['btn-small']}
                   onClick={handleIncrement}
                   title="Збільшити"
+                  aria-label="Збільшити кількість"
                 >
-                  +
+                  <span aria-hidden="true">+</span>
                 </button>
 
                 {totalMode && <div className={styles.removeBtnWrap}>
-                    <div className={styles.totalByRow}>{item.price * (selectedService?.quantity ?? 1)} грн</div>
-                  <div className={styles.removeBtn} onClick={handleRemove}>❌</div>
+                  <output className={styles.totalByRow}>{item.price * (selectedService?.quantity ?? 1)} грн</output>
+                  <button type="button" className={styles.removeBtn} onClick={handleRemove} title="Видалити" aria-label={`Видалити: ${item.name}`}>
+                    <CloseIcon />
+                  </button>
                 </div>}
               </div>
-
             </div>
-          ) : <button onClick={handleAdd} className={styles['btn-primary']}>Додати</button>}
-          <div>
-
-          </div>
-        </div>
+          ) : (
+            <button type="button" onClick={handleAdd} className={styles['btn-primary']} aria-label={`Додати: ${item.name}`}>
+              Додати
+            </button>
+          )}
+        </article>
       )}
-    </div>
+    </li>
   );
 };
 

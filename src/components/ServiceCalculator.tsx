@@ -4,7 +4,7 @@ import styles from '../styles/ServiceCalculator.module.css';
 import priceData from '../../price.json';
 import ServiceSection from './ServiceSection';
 import ServiceItem from './ServiceItem.tsx';
-import { DownloadIcon } from './icons/DownloadIcon.tsx';
+import { PdfIcon } from './icons/PdfIcon.tsx';
 import clsx from 'clsx';
 
 export default function ServiceCalculator() {
@@ -324,7 +324,9 @@ export default function ServiceCalculator() {
     <div className={styles['calculator-container']}>
       <div className={styles['calculator-content']}>
         <div className={styles['services-list']}>
-          <h1>Калькулятор цін на послуги центру догляду вдома на місяць</h1>
+          <header>
+            <h1>Калькулятор цін на послуги центру догляду вдома на місяць</h1>
+          </header>
           {priceData.services.map((sectionData: any, index) => (
             <ServiceSection
               key={index}
@@ -342,46 +344,45 @@ export default function ServiceCalculator() {
         </div>
 
         {selectedServices.size !== 0 && (
-          <div className={styles['totals-section']}>
-            <h2>Вибрані послуги</h2>
-            <>
-              <div className={styles['selected-services-list']}>
-                {Array.from(selectedServices.values()).map((service) => (
-                  <ServiceItem
-                    key={`${service.code}`}
-                    item={service}
-                    itemCode={service.code}
-                    selectedServices={selectedServices}
-                    onAddService={() => {
-                    }}
-                    onIncrementService={incrementService}
-                    onDecrementService={decrementService}
-                    onRemoveService={removeService}
-                    totalMode={true}
-                  />
-                ))}
-              </div>
+          <aside className={styles['totals-section']} aria-labelledby="selected-services-heading">
+            <h2 id="selected-services-heading">Вибрані послуги</h2>
+            <ul className={styles['selected-services-list']}>
+              {Array.from(selectedServices.values()).map((service) => (
+                <ServiceItem
+                  key={`${service.code}`}
+                  item={service}
+                  itemCode={service.code}
+                  selectedServices={selectedServices}
+                  onAddService={() => {
+                  }}
+                  onIncrementService={incrementService}
+                  onDecrementService={decrementService}
+                  onRemoveService={removeService}
+                  totalMode={true}
+                />
+              ))}
+            </ul>
 
-              <div className={styles['totals']}>
-                <div
-                  className={`${styles['total-row']} ${styles['total-price-row']}`}
+            <div className={styles['totals']}>
+              <p
+                className={`${styles['total-row']} ${styles['total-price-row']}`}
+                aria-live="polite"
+              >
+                <span className={styles.totalPriceText}>Загальна вартість:</span>
+                <strong
+                  className={`${styles['total-value']} ${styles['total-price']}`}
                 >
-                  <span className={styles.totalPriceText}>Загальна вартість:</span>
-                  <span
-                    className={`${styles['total-value']} ${styles['total-price']}`}
-                  >
-                    {totalPrice} грн
-                  </span>
-                </div>
-              </div>
-            </>
+                  <data value={totalPrice}>{totalPrice}</data> грн
+                </strong>
+              </p>
+            </div>
             <div style={{ display: 'flex', gap: 8, marginBottom: 8 }}>
-              <button className={clsx(styles['btn-primary'], styles.exportBtn )} onClick={exportToPdf}>
+              <button type="button" className={clsx(styles['btn-primary'], styles.exportBtn )} onClick={exportToPdf}>
+                <PdfIcon />
                 Завантажити PDF
-                <DownloadIcon />
               </button>
             </div>
-          </div>)}
+          </aside>)}
       </div>
     </div>
   );
