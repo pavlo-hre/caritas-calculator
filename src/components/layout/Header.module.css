@@ -1,0 +1,137 @@
+/* Font sizes in em for the same reason as ServiceCalculator.module.css (site text-size panel) */
+
+.header {
+  width: 100%;
+  background: #fff;
+  border-bottom: 1px solid var(--cz-line);
+  box-shadow: 0 8px 24px -20px rgba(0, 87, 168, 0.35);
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  width: 100%;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 12px 20px;
+  box-sizing: border-box;
+}
+
+@media (max-width: 1100px) {
+  .inner {
+    padding-inline: 16px;
+  }
+}
+
+.logo {
+  flex-shrink: 0;
+  display: block;
+  line-height: 0;
+}
+
+.logo img {
+  width: auto;
+  height: 56px;
+}
+
+/* Hotline pill */
+.hotline {
+  display: flex;
+  align-items: center;
+  gap: 0.75em;
+  padding: 6px 1.4em 6px 6px;
+  border-radius: 999px;
+  background: var(--cz-tint);
+  box-shadow: inset 0 0 0 1px var(--cz-line);
+  color: var(--cz-body);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: box-shadow 0.2s ease;
+}
+
+.hotline:hover {
+  box-shadow: inset 0 0 0 1px var(--cz-line-strong);
+}
+
+.hotlineIcon {
+  display: grid;
+  place-items: center;
+  width: 2.3em;
+  height: 2.3em;
+  border-radius: 50%;
+  background: var(--cz-yellow);
+  color: var(--cz-ink);
+  font-size: 1.1em;
+}
+
+.hotlineLabel {
+  font-size: 1.1em;
+  font-weight: 500;
+}
+
+.hotlineNum {
+  color: var(--cz-blue);
+  font-size: 1.35em;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+
+/* Social buttons */
+.socials {
+  display: flex;
+  gap: 10px;
+}
+
+.social {
+  display: grid;
+  place-items: center;
+  width: 2.5em;
+  height: 2.5em;
+  border-radius: 50%;
+  background: var(--cz-icon);
+  color: var(--cz-blue);
+  font-size: 1em;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.social:hover {
+  background: var(--cz-blue);
+  color: #fff;
+}
+
+.social svg {
+  width: 1.15em;
+  height: 1.15em;
+}
+
+@media (max-width: 900px) {
+  .hotlineLabel {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .inner {
+    gap: 12px;
+    padding-block: 10px;
+  }
+
+  .logo img {
+    height: 44px;
+  }
+
+  .socials {
+    display: none;
+  }
+
+  .hotline {
+    gap: 0.5em;
+    padding-right: 1em;
+  }
+
+  .hotlineNum {
+    font-size: 1.05em;
+  }
+}
